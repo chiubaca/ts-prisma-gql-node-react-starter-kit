@@ -2,21 +2,20 @@ import { gql } from "apollo-server";
 
 export const typeDefs = gql`
   type User {
-    id: ID!
+    id: Int!
     name: String!
     post: [Post!]
     like: [Like!]
   }
-
   type Post {
-    id: ID!
-    user: User!
+    id: Int!
+    user: User
     userId: Int
     like: [Like]
   }
 
   type Like {
-    id: ID!
+    id: Int!
     post: Post
     postId: Int
     user: User

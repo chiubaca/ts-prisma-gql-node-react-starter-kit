@@ -16,7 +16,7 @@ export type Scalars = {
 
 export type Like = {
   __typename?: 'Like';
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   post?: Maybe<Post>;
   postId?: Maybe<Scalars['Int']>;
   user?: Maybe<User>;
@@ -41,8 +41,8 @@ export type MutationLikePostArgs = {
 
 export type Post = {
   __typename?: 'Post';
-  id: Scalars['ID'];
-  user: User;
+  id: Scalars['Int'];
+  user?: Maybe<User>;
   userId?: Maybe<Scalars['Int']>;
   like?: Maybe<Array<Maybe<Like>>>;
 };
@@ -54,7 +54,7 @@ export type Query = {
 
 export type User = {
   __typename?: 'User';
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   name: Scalars['String'];
   post?: Maybe<Array<Post>>;
   like?: Maybe<Array<Like>>;
@@ -131,7 +131,6 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
   Like: ResolverTypeWrapper<Like>;
-  ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Mutation: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
@@ -144,7 +143,6 @@ export type ResolversTypes = ResolversObject<{
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = ResolversObject<{
   Like: Like;
-  ID: Scalars['ID'];
   Int: Scalars['Int'];
   Mutation: {};
   String: Scalars['String'];
@@ -155,7 +153,7 @@ export type ResolversParentTypes = ResolversObject<{
 }>;
 
 export type LikeResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Like'] = ResolversParentTypes['Like']> = ResolversObject<{
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   post?: Resolver<Maybe<ResolversTypes['Post']>, ParentType, ContextType>;
   postId?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
@@ -169,8 +167,8 @@ export type MutationResolvers<ContextType = Context, ParentType extends Resolver
 }>;
 
 export type PostResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Post'] = ResolversParentTypes['Post']> = ResolversObject<{
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   userId?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   like?: Resolver<Maybe<Array<Maybe<ResolversTypes['Like']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -181,7 +179,7 @@ export type QueryResolvers<ContextType = Context, ParentType extends ResolversPa
 }>;
 
 export type UserResolvers<ContextType = Context, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   post?: Resolver<Maybe<Array<ResolversTypes['Post']>>, ParentType, ContextType>;
   like?: Resolver<Maybe<Array<ResolversTypes['Like']>>, ParentType, ContextType>;

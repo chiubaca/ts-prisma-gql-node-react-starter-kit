@@ -1,13 +1,10 @@
 import { Resolvers } from "__generated__/graphql";
 
-const fakeUserID = 2;
+const fakeUserID = 1;
 
-export const resolvers = {
+export const resolvers: Resolvers = {
   Query: {
-    AllPosts: async (_, args, context) => {
-      const posts = await context.prisma.post.findMany();
-      return posts;
-    },
+    AllPosts: async (_, args, context) => await context.prisma.post.findMany(),
   },
   Mutation: {
     AddPost: async (_, args, context) =>
