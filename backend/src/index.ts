@@ -2,14 +2,14 @@ import { PrismaClient } from "@prisma/client";
 import { ApolloServer } from "apollo-server";
 
 import { resolvers } from "./resolvers";
-import { typeDefs } from "./typeDefs";
+import { schema } from "./schema/index";
 
 const runServer = () => {
   const prisma = new PrismaClient();
 
   const server = new ApolloServer({
     resolvers,
-    typeDefs,
+    schema,
     context: () => {
       return {
         prisma,
