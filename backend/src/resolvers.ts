@@ -4,7 +4,13 @@ const fakeUserID = 1;
 
 export const resolvers: Resolvers = {
   Query: {
-    AllPosts: async (_, args, context) => await context.prisma.post.findMany(),
+    AllPosts: async (_, { userId }, context) => {
+      console.log("TEST!!");
+
+      const res = await context.prisma.post.findMany({ where: { userId } });
+
+      return res;
+    },
   },
   Mutation: {
     AddPost: async (_, args, context) =>

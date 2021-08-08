@@ -25,8 +25,8 @@ export type Like = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  AddPost: Post;
-  LikePost: Post;
+  AddPost?: Maybe<Post>;
+  LikePost?: Maybe<Post>;
 };
 
 
@@ -44,12 +44,18 @@ export type Post = {
   id: Scalars['Int'];
   user?: Maybe<User>;
   userId?: Maybe<Scalars['Int']>;
+  body: Scalars['String'];
   like?: Maybe<Array<Maybe<Like>>>;
 };
 
 export type Query = {
   __typename?: 'Query';
-  AllPosts: Array<Post>;
+  AllPosts: Array<Maybe<Post>>;
+};
+
+
+export type QueryAllPostsArgs = {
+  userId: Scalars['Int'];
 };
 
 export type User = {
@@ -162,20 +168,21 @@ export type LikeResolvers<ContextType = Context, ParentType extends ResolversPar
 }>;
 
 export type MutationResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
-  AddPost?: Resolver<ResolversTypes['Post'], ParentType, ContextType, RequireFields<MutationAddPostArgs, 'body'>>;
-  LikePost?: Resolver<ResolversTypes['Post'], ParentType, ContextType, RequireFields<MutationLikePostArgs, 'postId'>>;
+  AddPost?: Resolver<Maybe<ResolversTypes['Post']>, ParentType, ContextType, RequireFields<MutationAddPostArgs, 'body'>>;
+  LikePost?: Resolver<Maybe<ResolversTypes['Post']>, ParentType, ContextType, RequireFields<MutationLikePostArgs, 'postId'>>;
 }>;
 
 export type PostResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Post'] = ResolversParentTypes['Post']> = ResolversObject<{
   id?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   userId?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  body?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   like?: Resolver<Maybe<Array<Maybe<ResolversTypes['Like']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type QueryResolvers<ContextType = Context, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-  AllPosts?: Resolver<Array<ResolversTypes['Post']>, ParentType, ContextType>;
+  AllPosts?: Resolver<Array<Maybe<ResolversTypes['Post']>>, ParentType, ContextType, RequireFields<QueryAllPostsArgs, 'userId'>>;
 }>;
 
 export type UserResolvers<ContextType = Context, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{

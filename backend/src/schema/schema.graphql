@@ -8,9 +8,9 @@ type Post {
   id: Int!
   user: User
   userId: Int
+  body: String!
   like: [Like]
 }
-
 type Like {
   id: Int!
   post: Post
@@ -18,12 +18,10 @@ type Like {
   user: User
   userId: Int
 }
-
 type Query {
-  AllPosts: [Post!]!
+  AllPosts(userId: Int!): [Post]!
 }
-
 type Mutation {
-  AddPost(body: String!): Post!
-  LikePost(postId: Int!): Post!
+  AddPost(body: String!): Post
+  LikePost(postId: Int!): Post
 }
